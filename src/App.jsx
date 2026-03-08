@@ -319,7 +319,13 @@ const Projects = ({ lang }) => {
                 <a href="https://lakepalicapartment.netlify.app" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-2.5 bg-white text-dark-bg font-bold rounded hover:bg-slate-200 transition-colors text-sm">
                   {t.proj_btn_live} <ExternalLink className="w-4 h-4" />
                 </a>
+
+                {/*  - GITHUB DUGME */}
+                <a href="https://github.com/Cp6uH33/lake-palic-apartment" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-2.5 border border-dark-border text-slate-300 font-bold rounded hover:bg-dark-card transition-colors text-sm">
+                  GitHub <Github className="w-4 h-4" />
+                </a>
               </div>
+
             </div>
           </div>
         </div>
