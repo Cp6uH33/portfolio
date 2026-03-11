@@ -499,10 +499,38 @@ const Services = ({ lang }) => {
 };
 
 // ==========================================
-// 5. KONTAKT SEKCIJA
+// 5. KONTAKT SEKCIJA (Prepravljeno za Netlify)
 // ==========================================
 const Contact = ({ lang }) => {
   const t = translations[lang];
+  // Stanje za praćenje statusa slanja (prazno, 'success', 'error')
+  const [formStatus, setFormStatus] = useState('');
+
+  // Funkcija koja presreće slanje forme
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Sprečava 404 grešku (prelazak na drugu stranicu)
+    
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // Šaljemo podatke na trenutnu putanju (gde ih Netlify preuzima)
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then(() => {
+        setFormStatus('success'); // Prikazujemo poruku o uspehu
+        form.reset(); // Praznimo formu
+        
+        // Sklanjamo poruku o uspehu posle 5 sekundi
+        setTimeout(() => setFormStatus(''), 5000);
+      })
+      .catch((error) => {
+        setFormStatus('error');
+        console.error(error);
+      });
+  };
 
   return (
     <section id="kontakt" className="py-32 px-6 relative bg-[#050508]">
@@ -515,13 +543,33 @@ const Contact = ({ lang }) => {
           {t.contact_desc}
         </p>
 
+        {/* PORUKE O STATUSU (Pojavljuju se iznad forme) */}
+        {formStatus === 'success' && (
+          <div className="mb-6 p-4 rounded-lg bg-green-500/20 border border-green-500 text-green-400 font-mono">
+            {lang === 'sr' ? 'Poruka je uspešno poslata!' : 'Message sent successfully!'}
+          </div>
+        )}
+        {formStatus === 'error' && (
+          <div className="mb-6 p-4 rounded-lg bg-red-500/20 border border-red-500 text-red-400 font-mono">
+            {lang === 'sr' ? 'Došlo je do greške. Pokušajte ponovo.' : 'An error occurred. Please try again.'}
+          </div>
+        )}
+
         {/* Netlify Forma  */}
-        <form className="max-w-xl mx-auto bg-dark-card border border-dark-border p-8 rounded-2xl shadow-2xl text-left" name="portfolio-kontakt" method="POST" data-netlify="true">
+        <form 
+          className="max-w-xl mx-auto bg-dark-card border border-dark-border p-8 rounded-2xl shadow-2xl text-left relative" 
+          name="portfolio-kontakt" 
+          method="POST" 
+          data-netlify="true"
+          onSubmit={handleSubmit} // <--- OVDE POZIVAMO FUNKCIJU
+        >
+          {/* OVO JE KLJUČNO ZA REACT: Skriveno polje mora da se zove "form-name" i vrednost mora da bude ista kao atribut "name" na formi! */}
           <input type="hidden" name="form-name" value="portfolio-kontakt" />
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="block text-xs font-mono text-slate-400 mb-2 uppercase">{t.contact_form_name}</label>
+              {/* OBAVEZNO SVAKI INPUT MORA IMATI ATRIBUT name="" */}
               <input type="text" name="name" required className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan transition-colors font-sans" />
             </div>
             <div>
@@ -544,6 +592,7 @@ const Contact = ({ lang }) => {
     </section>
   );
 };
+
 
 // ==========================================
 // 6. FOOTER
