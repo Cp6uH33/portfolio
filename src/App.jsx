@@ -240,8 +240,8 @@ const Projects = ({ lang }) => {
     {
       id: 1,
       title: "Door Gate Sistem",
-      desc_sr: "Kompletan E-Commerce sajt i online prodavnica za premium stolariju, vrata i sisteme. Optimizovan za brzu prodaju i lako naručivanje.",
-      desc_en: "Complete E-Commerce site and online store for premium carpentry, doors, and systems. Optimized for fast sales and easy ordering.",
+      desc_sr: "Headless e-commerce rešenje za prodaju motora za kapije i video interfona. WordPress + WooCommerce backend, Next.js frontend deployovan na Vercel-u. Rezultat: brži load, bolji SEO i moderan shopping experience u poređenju sa klasičnim WordPress temama.",
+      desc_en: "Headless e-commerce solution for selling gate motors and video intercoms. WordPress + WooCommerce backend, Next.js frontend deployed on Vercel. Result: faster load times, better SEO, and a modern shopping experience compared to traditional WordPress themes.",
       tech: ["Wordpress", "E-Commerce", "Woo-Commerce"],
       link: "https://doorgatesistem.com/",
       github: "#"
