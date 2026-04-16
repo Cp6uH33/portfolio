@@ -447,6 +447,97 @@ const TechStack = ({ lang }) => {
           ))}
         </Reveal>
 
+        {/* ── AI & AUTOMATION GROUP ── */}
+        <Reveal className="mt-8">
+          {/* Divider + label */}
+          <div className="flex items-center gap-4 mb-5">
+            <div style={{ height: '1px', background: '#2a2520', flex: 1 }} />
+            <span style={{ fontFamily: 'monospace', fontSize: '10px', color: '#4a4035', letterSpacing: '0.15em' }} className="uppercase shrink-0">
+              AI &amp; AUTOMATION
+            </span>
+            <div style={{ height: '1px', background: '#2a2520', flex: 1 }} />
+          </div>
+
+          {/* Cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '8px' }}>
+            {[
+              {
+                name: 'Claude Code',
+                icon: null,
+                tooltip: lang === 'sr' ? 'AI coding agent' : 'AI coding agent',
+              },
+              {
+                name: 'Anthropic API',
+                icon: '/claude.svg',
+                tooltip: lang === 'sr' ? 'LLM integracija u projekte' : 'LLM integration',
+              },
+              {
+                name: 'n8n',
+                icon: '/n8n.svg',
+                tooltip: lang === 'sr' ? 'Workflow automatizacija' : 'Workflow automation',
+              },
+              {
+                name: 'Vercel',
+                icon: '/vercel.svg',
+                tooltip: lang === 'sr' ? 'Deploy & hosting' : 'Deploy & hosting',
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="group relative flex flex-col items-center gap-1.5 sm:gap-2 p-2 sm:p-3 md:p-4 rounded-xl cursor-default"
+                style={{
+                  background: '#141414',
+                  border: '0.5px solid #2a2520',
+                  transition: 'border-color 200ms ease',
+                }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = '#b49664'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = '#2a2520'}
+              >
+                {/* Icon */}
+                <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 flex items-center justify-center">
+                  {item.icon ? (
+                    <img
+                      src={item.icon}
+                      alt={item.name}
+                      className="w-full h-full object-contain"
+                      style={{ filter: 'brightness(0) invert(1)', opacity: 0.4 }}
+                      onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+                      onMouseLeave={e => e.currentTarget.style.opacity = '0.4'}
+                    />
+                  ) : (
+                    <span style={{ fontFamily: 'monospace', fontSize: '18px', color: '#4a4035', lineHeight: 1, transition: 'color 200ms ease' }}
+                      className="group-hover:[color:#b49664]">
+                      &gt;_
+                    </span>
+                  )}
+                </div>
+
+                {/* Label */}
+                <span
+                  className="text-[9px] sm:text-[10px] md:text-[11px] font-mono text-center leading-tight"
+                  style={{ color: '#4a4035', transition: 'color 200ms ease' }}
+                >
+                  {item.name}
+                </span>
+
+                {/* Tooltip */}
+                <div
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2.5 py-1.5 whitespace-nowrap z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  style={{
+                    background: '#1a1a1a',
+                    border: '0.5px solid #2a2520',
+                    borderRadius: '4px',
+                    fontSize: '11px',
+                    color: '#8a7f75',
+                  }}
+                >
+                  {item.tooltip}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
       </div>
     </section>
   );
