@@ -331,20 +331,23 @@ const Hero = ({ lang }) => {
         <div className="hidden lg:block">
           <div className="relative">
             {/* Glow behind card */}
-            <div className="absolute -inset-6 bg-indigo-600/15 rounded-3xl blur-3xl pointer-events-none" />
+            <div className="absolute -inset-12 bg-indigo-600/20 rounded-3xl blur-3xl pointer-events-none" />
 
-            <div className="relative w-64 bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden">
-              {/* Portrait area — drop portrait.jpg into /public to activate */}
-              <div className="h-72 relative overflow-hidden bg-gradient-to-br from-indigo-950/50 via-zinc-900 to-zinc-950">
+            <div className="flex flex-col items-center gap-3">
+              {/* Portrait — 20% wider and taller than info strip (256 * 1.2 = 307, 288 * 1.2 = 346) */}
+              <div className="w-[307px] h-[346px] relative bg-gradient-to-br from-indigo-950/50 via-zinc-900 to-zinc-950">
                 <div className="absolute inset-0 flex items-center justify-center select-none">
-                  <span className="text-[110px] font-black text-white/[0.05] leading-none tracking-tighter">II</span>
+                  <span className="text-[130px] font-black text-white/[0.05] leading-none tracking-tighter">II</span>
                 </div>
-
                 <img src="/portrait.png" alt="Ignjatije" className="absolute inset-0 w-full h-full object-cover" />
+                {/* Gradient fade into background on all edges */}
+                <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(ellipse at center, transparent 45%, #09090b 100%)'}} />
+                <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{background: 'linear-gradient(to top, #09090b 0%, transparent 100%)'}} />
+                <div className="absolute top-0 left-0 right-0 h-12 pointer-events-none" style={{background: 'linear-gradient(to bottom, #09090b 0%, transparent 100%)'}} />
               </div>
 
-              {/* Info strip */}
-              <div className="p-5 border-t border-white/[0.06]">
+              {/* Info strip — same size as before (w-64 = 256px) */}
+              <div className="w-64 bg-white/[0.03] rounded-2xl p-5">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <p className="text-sm font-semibold text-white">Ignjatije Ižipac</p>
@@ -356,11 +359,11 @@ const Hero = ({ lang }) => {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-white/[0.04] rounded-lg p-3 text-center">
+                  <div className="p-3 text-center">
                     <div className="text-xl font-bold text-white">4+</div>
                     <div className="text-[10px] text-slate-600 mt-0.5 uppercase tracking-wide font-mono">{t.hero_stat_years_label}</div>
                   </div>
-                  <div className="bg-white/[0.04] rounded-lg p-3 text-center">
+                  <div className="p-3 text-center">
                     <div className="text-xl font-bold text-white">30+</div>
                     <div className="text-[10px] text-slate-600 mt-0.5 uppercase tracking-wide font-mono">{t.hero_stat_proj_label}</div>
                   </div>
@@ -391,14 +394,13 @@ const TechStack = ({ lang }) => {
     { name: 'PHP', logo: '/php-logo.svg' },
     { name: 'WordPress', logo: '/wordpress-logo.svg' },
     { name: 'Vite', logo: '/vite.svg' },
+    { name: 'Next.js', logo: '/nextjs.svg' },
+    { name: 'Node.js', logo: '/nodejs.svg' },
+    { name: 'MySQL', logo: '/mysql.svg' },
+    { name: 'Git', logo: '/git.svg' },
   ];
 
-  const textOnly = [
-    { name: 'Next.js' },
-    { name: 'Node.js' },
-    { name: 'MySQL' },
-    { name: 'Git' },
-  ];
+  const textOnly = [];
 
   return (
     <section id="stack" className="py-24 px-6 border-t border-white/[0.05]">
@@ -411,18 +413,18 @@ const TechStack = ({ lang }) => {
         </Reveal>
 
         {/* Logo items */}
-        <Reveal className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-10 gap-3">
+        <Reveal className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-10 gap-2 md:gap-3">
           {technologies.map((tech, i) => (
             <div
               key={i}
-              className="group flex flex-col items-center gap-3 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-indigo-500/30 hover:bg-indigo-500/[0.04] transition-all duration-300 cursor-default"
+              className="group flex flex-col items-center gap-1.5 sm:gap-2 p-2 sm:p-3 md:p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-indigo-500/30 hover:bg-indigo-500/[0.04] transition-all duration-300 cursor-default"
             >
               <img
                 src={tech.logo}
                 alt={tech.name}
-                className="w-8 h-8 object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
               />
-              <span className="text-[11px] text-slate-600 group-hover:text-indigo-400 transition-colors duration-300 font-mono text-center leading-tight">
+              <span className="text-[9px] sm:text-[10px] md:text-[11px] text-slate-600 group-hover:text-indigo-400 transition-colors duration-300 font-mono text-center leading-tight">
                 {tech.name}
               </span>
             </div>
@@ -478,7 +480,7 @@ const Projects = ({ lang }) => {
       tech: ['Next.js', 'WordPress', 'WooCommerce', 'Vercel'],
       link: 'https://doorgatesistem.com/',
       github: null,
-      image: null,
+      image: '/doorgat-screenshot.png',
       siteUrl: 'doorgatesistem.com',
     },
     {
@@ -490,7 +492,7 @@ const Projects = ({ lang }) => {
       tech: ['WordPress', 'Elementor', 'PHP', 'Custom CSS'],
       link: 'https://vesautocentar.rs/',
       github: null,
-      image: null,
+      image: '/ves-screenshot.png',
       siteUrl: 'vesautocentar.rs',
     },
   ];
